@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>IDEV INC | Next-Gen Hardware & Software</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* -------------------- RESET & BASE -------------------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0f6ced;    /* vibrant, modern blue */
+            --primary-glow: rgba(15, 108, 237, 0.4);
+            --bg-primary: #0a0c10;
+            --bg-card: #13161c;
+            --bg-elevated: #1a1f2a;
+            --text-primary: #ffffff;
+            --text-secondary: #b1b9c9;
+            --border-dim: #2a2f3a;
+            --transition-smooth: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* custom scroll */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #111;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 12px;
+        }
+
+        /* -------------------- TYPOGRAPHY / UTILITIES -------------------- */
+        h1, h2, h3 {
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: 2.3rem;
+            margin-bottom: 0.75rem;
+            background: linear-gradient(135deg, #fff, var(--primary));
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+
+        .section-sub {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+            font-size: 1.1rem;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        /* -------------------- NAVIGATION (MOBILE-FIRST) -------------------- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background: rgba(10, 12, 16, 0.92);
+            backdrop-filter: blur(14px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: 0.2s;
+        }
+
+        .logo {
+            font-size: 1.65rem;
+            font-weight: 800;
+            background: linear-gradient(130deg, #ffffff, var(--primary));
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 1.8rem;
+            list-style: none;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: var(--text-primary);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: 0.25s;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* mobile nav adjustments */
+        @media (max-width: 680px) {
+            nav {
+                padding: 0.8rem 5%;
+            }
+            nav ul {
+                gap: 1rem;
+            }
+            nav ul li a {
+                font-size: 0.8rem;
+            }
+            .logo {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* -------------------- HERO SECTION (optimized) -------------------- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(circle at 20% 30%, rgba(15,108,237,0.15), rgba(0,0,0,0.95)),
+                        url('i3.png');
+            background-position: center 20%;
+            background-blend-mode: overlay;
+            position: relative;
+            padding: 6rem 1.5rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(145deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 8vw, 5.5rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFF, #80b4ff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 4vw, 1.3rem);
+            color: #e0e6f0;
+            max-width: 600px;
+            margin: 0 auto;
+            backdrop-filter: blur(4px);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-top: 2rem;
+            padding: 0.9rem 2.2rem;
+            background: linear-gradient(95deg, var(--primary), #3b82f6);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 60px;
+            box-shadow: 0 6px 14px rgba(15,108,237,0.3);
+            transition: var(--transition-smooth);
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn i {
+            transition: transform 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 28px rgba(15,108,237,0.4);
+            gap: 0.9rem;
+        }
+
+        .btn:hover i {
+            transform: translateX(4px);
+        }
+
+        /* -------------------- PORTFOLIO SECTION -------------------- */
+        .portfolio {
+            padding: 5rem 5%;
+            text-align: center;
+            background: var(--bg-primary);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border-radius: 1.5rem;
+            overflow: hidden;
+            border: 1px solid var(--border-dim);
+            transition: var(--transition-smooth);
+            cursor: pointer;
+            box-shadow: 0 12px 20px -12px rgba(0,0,0,0.4);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 25px 35px -12px rgba(0,0,0,0.6);
+        }
+
+        .project-card:hover img {
+            transform: scale(1.03);
+        }
+
+        /* -------------------- LEADERSHIP TEAM (4 members grid) -------------------- */
+        .team {
+            padding: 5rem 5%;
+            background: radial-gradient(ellipse at 30% 40%, #0d1117, #07090e);
+            text-align: center;
+        }
+
+        .team-grid {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+
+        .team-card {
+            background: var(--bg-elevated);
+            backdrop-filter: blur(4px);
+            padding: 2rem 1.5rem;
+            border-radius: 2rem;
+            width: 280px;
+            transition: var(--transition-smooth);
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 20px 30px -15px black;
+        }
+
+        .team-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            background: #1c2330;
+        }
+
+        .member-photo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1.2rem;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 15px rgba(15,108,237,0.3);
+        }
+
+        .member-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.4s;
+        }
+
+        .team-card:hover .member-photo img {
+            transform: scale(1.05);
+        }
+
+        .team-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .role {
+            color: var(--primary);
+            font-weight: 600;
+            letter-spacing: -0.2px;
+            margin: 0.5rem 0 0.8rem;
+            font-size: 0.9rem;
+        }
+
+        .bio {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.45;
+        }
+
+        /* responsive for 4 cards */
+        @media (max-width: 1200px) {
+            .team-grid {
+                gap: 1.5rem;
+            }
+            .team-card {
+                width: 260px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .team-grid {
+                gap: 1.8rem;
+            }
+        }
+
+        @media (max-width: 680px) {
+            .team-card {
+                width: 100%;
+                max-width: 320px;
+            }
+        }
+
+        /* -------------------- FOOTER + CONTACT (enhanced) -------------------- */
+        footer {
+            background: #05070a;
+            padding: 4rem 5% 2rem;
+            border-top: 1px solid rgba(15,108,237,0.2);
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2.5rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .contact-box h3, .social-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.2rem;
+            font-weight: 500;
+            position: relative;
+            display: inline-block;
+        }
+
+        .contact-box h3:after, .social-box h3:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        .contact-box p {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 1rem 0;
+            color: var(--text-secondary);
+            transition: 0.2s;
+        }
+
+        .contact-box p i {
+            width: 28px;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .contact-box p:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .social-images {
+            display: flex;
+            gap: 1.4rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .social-images a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #13161c;
+            width: 48px;
+            height: 48px;
+            border-radius: 30px;
+            transition: 0.25s;
+            border: 1px solid #2c313d;
+        }
+
+        .social-images img {
+            width: 26px;
+            height: 26px;
+            filter: brightness(0) invert(0.9);
+            transition: 0.2s;
+        }
+
+        .social-images a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+            border-color: transparent;
+        }
+
+        .social-images a:hover img {
+            filter: brightness(0) invert(1);
+            transform: scale(1.05);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1a1f2a;
+            color: #5f6c84;
+            font-size: 0.8rem;
+        }
+
+        /* ----------- ANIMATIONS & responsiveness tweaks ----------- */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 4%;
+            }
+            .gallery {
+                gap: 1.4rem;
+            }
+            .footer-container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .contact-box h3:after, .social-box h3:after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .contact-box p {
+                justify-content: center;
+            }
+            .social-images {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content .btn {
+                padding: 0.7rem 1.6rem;
+                font-size: 0.9rem;
+            }
+            .portfolio h2, .team h2 {
+                font-size: 1.8rem;
+            }
+            .project-card img {
+                height: 190px;
+            }
+        }
+
+        /* smooth load animation */
+        section {
+            opacity: 0;
+            transform: translateY(18px);
+            animation: fadeUp 0.7s forwards;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        section:nth-of-type(1) { animation-delay: 0.1s; }
+        section:nth-of-type(2) { animation-delay: 0.2s; }
+        section:nth-of-type(3) { animation-delay: 0.3s; }
+        footer { animation-delay: 0.4s; opacity: 0; animation: fadeUp 0.7s forwards; }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">⟡ IDEV INC</div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#team">Leadership</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>IDEV INC</h1>
+            <p>Engineering the future — from silicon to cloud. Hardware resilience meets intelligent software.</p>
+            <a href="#work" class="btn">Explore innovations <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- Portfolio Section (Our Work) -->
+    <section id="work" class="portfolio">
+        <div class="container">
+            <h2>Our Work</h2>
+            <div class="section-sub">Boundary-pushing softwar concepts and full-stack digital ecosystems</div>
+            <div class="gallery">
+                
+                <div class="project-card"><img src="i6.png" alt=""></div>
+                <div class="project-card"><img src="i9.jpg" alt=""></div>
+                <div class="project-card"><img src="i7.jpg" alt=""></div>
+                <div class="project-card"><img src="px.png" alt=""></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Team Section - EXACTLY 4 members -->
+    <section id="team" class="team">
+        <div class="container">
+            <h2>Leadership Team</h2>
+            <div class="section-sub">Visionaries driving  software excellence</div>
+            <div class="team-grid">
+                <!-- 1. CEO -->
+                <div class="team-card">
+                    <div class="member-photo">
+                        <img src="download.jpg" alt="Mukhtar olufadi">
+                    </div>
+                    <h3>olufadi Mukhtar</h3>
+                    <p class="role">Founder & CEO</p>
+                    <p class="bio">. Leads IDEV's mission to unify hardware reliability and scalable multi-tenant platforms.</p>
+                </div>
+                <!-- 2. Technical Director -->
+                <div class="team-card">
+                    <div class="member-photo">
+                        <img src="download.jpg" alt="Graphics Director">
+                    </div>
+                    <h3>Ibrahim Ahmad.O</h3>
+                    <p class="role">Graphics Director</p>
+                    <p class="bio">Specialist in Graphics Design and  UI/UX next-gen embedded systems.</p>
+                </div>
+                <!-- 3. Chief Innovation Officer -->
+                <div class="team-card">
+                    <div class="member-photo">
+                        <img src="download.jpg" alt="Programming Director">
+                    </div>
+                    <h3>Jimoh Ridwan</h3>
+                    <p class="role">VP of Programming</p>
+                    <p class="bio">lead Programmer and responsive web app specialist</p>
+                </div>
+                <!-- 4. VP of Engineering (NEW 4th member) -->
+                <div class="team-card">
+                    <div class="member-photo">
+                        <img src="download.jpg" alt="CIO">
+                    </div>
+                    <h3>Adefioye Ibrahim</h3>
+                    <p class="role">Chief Innovation Office</p>
+                    <p class="bio">Pioneer in AI-driven software optimization and cross-cloud orchestration. Driving IDEV's patent-pending core architectures.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer & Contact Section -->
+    <footer id="contact">
+        <div class="footer-container">
+            <div class="contact-box">
+                <h3>Connect with us</h3>
+                <p><i class="fas fa-envelope"></i> idevincoperated.com</p>
+                <p><i class="fas fa-phone-alt"></i> +234 7074218666</p>
+                
+            </div>
+            <div class="social-box">
+                <h3>Digital footprint</h3>
+                <div class="social-images">
+                    <a href="Https://x.com/IDEV_nig" aria-label="X (Twitter)"><img src="t.png" alt="Twitter"></a>
+                    <a href="https://www.instagram.com/idev_inc/" aria-label="Instagram"><img src="i.png" alt="Instagram"></a>
+                    <a href="https://www.tiktok.com/@idev_inc" aria-label="tiktok"><img src="tiktok.jpg" alt="LinkedIn"></a>
+                    <a href="https://github.com/idevincoperated" aria-label="GitHub"><img src="g.png" alt="GitHub"></a>
+                </div>
+                <p style="margin-top: 20px; font-size: 0.85rem; color:#5b6a8a;">Follow our open-source hardware repos & design journals</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2026 IDEV INC — Where Software meets imagination. All trademarks reserved.</p>
+        </div>
+    </footer>
+
+    <!-- smooth scroll + active link highlight -->
+    <script>
+        (function() {
+            const navLinks = document.querySelectorAll('nav ul li a');
+            const sections = document.querySelectorAll('section, footer');
+
+            function setActiveLink() {
+                let current = '';
+                const scrollPos = window.scrollY + 120;
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionBottom = sectionTop + section.offsetHeight;
+                    if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                navLinks.forEach(link => {
+                    link.style.color = '';
+                    link.classList.remove('active');
+                    const href = link.getAttribute('href').substring(1);
+                    if (href === current) {
+                        link.style.color = 'var(--primary)';
+                        link.classList.add('active');
+                    } else {
+                        link.style.color = '';
+                    }
+                });
+            }
+            window.addEventListener('scroll', setActiveLink);
+            window.addEventListener('load', setActiveLink);
+
+            // smooth anchor offset for fixed header
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href').substring(1);
+                    if(!targetId) return;
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        e.preventDefault();
+                        const navHeight = document.querySelector('nav').offsetHeight;
+                        const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+                        window.scrollTo({
+                            top: elementPosition - navHeight - 12,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
